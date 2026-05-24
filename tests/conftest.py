@@ -1,4 +1,13 @@
 import os
+import sys
+from pathlib import Path
+
+# Принудительно вычисляем путь к папке blogicum и добавляем её в Python Path
+BASE_DIR = Path(__file__).resolve().parent.parent / 'blogicum'
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+    
+import os
 from pathlib import Path
 
 import pytest
