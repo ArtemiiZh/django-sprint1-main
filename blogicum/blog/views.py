@@ -68,4 +68,4 @@ def post_detail(request, id) -> HttpResponse:
 
 def category_posts(request, category_slug) -> HttpResponse:
     context = {'category': category_slug}
-    return render(request, 'blog/category.html', context)
+    return render(request, 'blog/category.html', context)# final force push
