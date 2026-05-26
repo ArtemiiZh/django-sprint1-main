@@ -124,6 +124,7 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+mypy.ini
 
 # Pyre type checker
 .pyre/
@@ -153,5 +154,5 @@ build_tests/
 yap_testing
 html/img/img/
 
-# html папка
-html/
+#personal config files
+.djlintrc
