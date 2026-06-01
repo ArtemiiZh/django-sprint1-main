@@ -1,6 +1,11 @@
 import os
-from pathlib import Path
+import sys
 
+# Принудительно регистрируем папку blogicum в системных путях Python
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'blogicum')))
+
+# --- Дальше идёт ваш оригинальный код файла без изменений ---
+from pathlib import Path
 import pytest
 from django.template import TemplateDoesNotExist
 
@@ -115,3 +120,4 @@ def try_get_url(client, url: str):
             f'При попытке загрузки страницы по адресу `{url}` возникла ошибка:'
             f' {response}'
         )
+
