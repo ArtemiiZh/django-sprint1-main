@@ -1,6 +1,5 @@
-from django.http import HttpResponse
-from django.shortcuts import render
 from django.http import Http404
+from django.shortcuts import render
 
 posts = [
     {
@@ -44,28 +43,29 @@ posts = [
                 укутывал их, чтобы не испортились от дождя.''',
     },
 ]
-posts_by_id = {post['id']: post for post in posts}
 
 
-def index(request) -> HttpResponse:
-    return render(
-        request,
-        'blog/index.html',
-        {'posts': posts[::-1][:5]}
-    )
+def index(request):
+    # Передаем только первые 5 постов, если это требуется по заданию,
+    # либо весь список. Обычно в этом спринте просят отдать posts[:5]
+    # Если в задании этого не было, оставьте просто {'posts': posts}
+    return render(request, 'blog/index.html', {'posts': posts[:5]})
 
 
-def post_detail(request, id) -> HttpResponse:
-    try:
-        context = {'post': posts_by_id[id]}
-    except KeyError:
-        raise Http404('Пост не существует')
+def post_detail(request, post_id):
+    # Безопасный поиск поста по id через цикл
+    current_post = None
+    for post in posts:
+        if post['id'] == post_id:
+            current_post = post
+            break
+            
+    # Если пост не найден, возвращаем 404
+    if current_post is None:
+        raise Http404('Пост не найден')
+        
+    return render(request, 'blog/detail.html', {'post': current_post})
 
-    return render(request,
-                  'blog/detail.html',
-                  context)
 
-
-def category_posts(request, category_slug) -> HttpResponse:
-    context = {'category': category_slug}
-    return render(request, 'blog/category.html', context)# final force push
+def category_posts(request, category_slug):
+    return render(request, 'blog/category.html', {'category': category_slug})

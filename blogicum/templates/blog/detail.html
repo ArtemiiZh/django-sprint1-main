@@ -1,18 +1,8 @@
-{% extends "base.html" %}
-{% block title %}{{ post.location }}. {{ post.date }}{% endblock title %}
-{% block main %}
-<article>
-  <ul>
-    <li>
-      Место: {{ post.location }}       
-    </li>
-    <li>
-      Дата: {{ post.date }}
-    </li>
-    <li>
-      Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a>
-    </li>
-  </ul>         
-  <p> {{ post.text|linebreaks }}</p>          
-</article>
-{% endblock main %}
+{% extends 'base.html' %}
+
+{% block title %} {{ post.location }} {{ post.date }} {% endblock %}   
+
+{% block content %}
+  {# Убираем "blog/" из пути, так как папка includes лежит в корне templates #}
+  {% include 'includes/post.html' with crop_text=False %}
+{% endblock %}

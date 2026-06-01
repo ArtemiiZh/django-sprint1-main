@@ -8,3 +8,4 @@ def test_blog_posts(posts):
     assert solution_posts == posts, (
         'Убедитесь, что список с постами `posts` из файла `blog/views.py` '
         'соответствуют списку из задания.')
+    

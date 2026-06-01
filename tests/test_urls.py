@@ -111,3 +111,4 @@ def test_pages_url_names(name):
             f'При поиске пути по имени `{name}` '
             f'возникла ошибка: {e}'
         ) from e
+

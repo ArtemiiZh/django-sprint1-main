@@ -38,3 +38,4 @@ def test_apps_registered(settings_app_name, project_dirname):
         f'Убедитесь, что приложения {app_names} зарегистрированы в файле '
         'settings.py'
     )
+

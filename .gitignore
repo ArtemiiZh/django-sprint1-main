@@ -124,7 +124,6 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
-mypy.ini
 
 # Pyre type checker
 .pyre/
@@ -154,5 +153,4 @@ build_tests/
 yap_testing
 html/img/img/
 
-#personal config files
-.djlintrc
+static_dev/css/bootstrap.min.css
