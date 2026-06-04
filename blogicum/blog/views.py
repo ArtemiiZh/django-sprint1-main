@@ -59,11 +59,11 @@ def post_detail(request, post_id):
         if post['id'] == post_id:
             current_post = post
             break
-            
+
     # Если пост не найден, возвращаем 404
     if current_post is None:
         raise Http404('Пост не найден')
-        
+
     return render(request, 'blog/detail.html', {'post': current_post})
 
 
