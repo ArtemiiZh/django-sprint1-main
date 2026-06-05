@@ -1,6 +1,9 @@
 from django.http import Http404
 from django.shortcuts import render
 
+# Константы
+POSTS_LIMIT = 5
+
 posts = [
     {
         'id': 0,
@@ -44,26 +47,20 @@ posts = [
     },
 ]
 
+# Генератор словаря для быстрого поиска постов по ID
+posts_dict = {post['id']: post for post in posts}
+
 
 def index(request):
-    # Передаем только первые 5 постов, если это требуется по заданию,
-    # либо весь список. Обычно в этом спринте просят отдать posts[:5]
-    # Если в задании этого не было, оставьте просто {'posts': posts}
-    return render(request, 'blog/index.html', {'posts': posts[:5]})
+    return render(request, 'blog/index.html', {'posts': posts[:POSTS_LIMIT]})
 
 
 def post_detail(request, post_id):
-    # Безопасный поиск поста по id через цикл
-    current_post = None
-    for post in posts:
-        if post['id'] == post_id:
-            current_post = post
-            break
-
-    # Если пост не найден, возвращаем 404
-    if current_post is None:
+    # Исправление замечания: если id нет в словаре, отдаем 404, а не 500
+    if post_id not in posts_dict:
         raise Http404('Пост не найден')
 
+    current_post = posts_dict[post_id]
     return render(request, 'blog/detail.html', {'post': current_post})
 
 
